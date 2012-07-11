@@ -14,7 +14,7 @@ function Write-TSManualStep ([string]$Message) {
 }
 
 function Write-TSFix ([string]$Message) {
-	Write-Host -Object "`nFix: $Message" -ForegroundColor Green
+	Write-Host -Object "`nFix Applied: $Message" -ForegroundColor Green
 }
 
 function ExecuteTest
