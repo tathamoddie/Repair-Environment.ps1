@@ -9,10 +9,7 @@ $ErrorActionPreference = "Stop"
 if ($Verbose) { $VerbosePreference = "Continue" ; }
 $PSScriptRoot = $MyInvocation.MyCommand.Path | Split-Path
 $ModulePath = $PSScriptRoot | Join-Path -ChildPath RepairDevelopmentEnvironmentModules
-
-Import-Module -Force -Name $ModulePath\TestHarness
-Import-Module -Force -Name $ModulePath\IisTests
-Import-Module -Force -Name $ModulePath\SecurityTests
+Get-ChildItem $ModulePath | Select-Object -ExpandProperty FullName | Import-Module -Force
 
 Test-PSInstanceMatchesOSBitness
 Test-PSInstanceIsElevated

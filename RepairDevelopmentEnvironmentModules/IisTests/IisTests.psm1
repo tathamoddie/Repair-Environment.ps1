@@ -1,14 +1,14 @@
 ﻿#requires -Version 2
 $ErrorActionPreference = "Stop"
 
-Import-Module -Name WebAdministration
-
 function Test-IisBindingExists (
 	$AssertionMessage,
 	$Port,
 	$Hostname,
 	$ExpectedSiteBinding
 ) {
+	Import-Module -Name WebAdministration
+
 	ExecuteTest `
 		-AssertionMessage $AssertionMessage `
 		-TestScript {
@@ -60,6 +60,8 @@ function Test-IisBindingIsToCorrectSite (
 	$Hostname,
 	$ExpectedSiteBinding
 ) {
+	Import-Module -Name WebAdministration
+
 	ExecuteTest `
 		-AssertionMessage $AssertionMessage `
 		-TestScript {
