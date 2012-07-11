@@ -1,6 +1,8 @@
 ﻿#requires -Version 2
 $ErrorActionPreference = "Stop"
 
+Import-Module -Name WebAdministration
+
 function Test-IisBindingExists (
 	$AssertionMessage,
 	$Port,
@@ -13,13 +15,13 @@ function Test-IisBindingExists (
 		
 			$Binding = ":$($Port):$($Hostname)"
 		
-			$ActualSite = Get-WebSite |
+			$ActualSite = Get-Website |
 				Where-Object {
 					@($_.Bindings.Collection | 
 						Select-Object -ExpandProperty BindingInformation |
 						Where-Object { $_ -like "*$Binding" }).Length -gt 0
 				}
-			$ExpectedSite = Get-WebSite |
+			$ExpectedSite = Get-Website |
 				Where-Object {
 					@($_.Bindings.Collection | 
 						Select-Object -ExpandProperty BindingInformation |
@@ -40,7 +42,7 @@ function Test-IisBindingExists (
 			return $true
 		} `
 		-FixScript {
-			$ExpectedSite = Get-WebSite |
+			$ExpectedSite = Get-Website |
 				Where-Object {
 					@($_.Bindings.Collection | 
 						Select-Object -ExpandProperty BindingInformation |
@@ -64,13 +66,13 @@ function Test-IisBindingIsToCorrectSite (
 			
 			$Binding = ":$($Port):$($Hostname)"
 		
-			$ActualSite = Get-WebSite |
+			$ActualSite = Get-Website |
 				Where-Object {
 					@($_.Bindings.Collection | 
 						Select-Object -ExpandProperty BindingInformation |
 						Where-Object { $_ -like "*$Binding" }).Length -gt 0
 				}
-			$ExpectedSite = Get-WebSite |
+			$ExpectedSite = Get-Website |
 				Where-Object {
 					@($_.Bindings.Collection | 
 						Select-Object -ExpandProperty BindingInformation |
@@ -95,7 +97,7 @@ function Test-IisBindingIsToCorrectSite (
 			
 			$Binding = ":$($Port):$($Hostname)"
 		
-			$ExpectedSite = Get-WebSite |
+			$ExpectedSite = Get-Website |
 				Where-Object {
 					@($_.Bindings.Collection | 
 						Select-Object -ExpandProperty BindingInformation |
