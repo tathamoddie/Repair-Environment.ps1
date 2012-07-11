@@ -14,7 +14,7 @@ When you're joining a new project:
     
     C:\code> cd SomeProject
     
-    C:\code\SomeProject> Repair-DevelopmentEnvironment.ps1 -Confirm:$false
+    C:\code\SomeProject> Repair-DevelopmentEnvironment.ps1
     Problem: IIS site missing for www.site.localtest.me
     Fixed: IIS site created for www.site.localtest.me
     
@@ -26,7 +26,7 @@ When you're joining a new project:
     
     All tests now passing (with fixes)
     
-When you've just pulled, then your environment broke:
+When you've just pulled, then your environment broke because another developer introduced a new dependency:
 
     C:\code\SomeProject> git pull
     
@@ -35,3 +35,9 @@ When you've just pulled, then your environment broke:
     Fixed: Back connection hostname added for service.site.localtest.me
     
     All tests now passing (with fixes)
+
+When you're not sure if it's your environment or your code:
+
+    C:\code\SomeProject> Repair-DevelopmentEnvironment.ps1
+    
+    All tests pass: if your code isn't working, then either this script is incomplete or your code is broken
