@@ -1,4 +1,4 @@
-# Repair-DevelopmentEnvironment
+# Repair-DevelopmentEnvironment.ps1
 
 Configuring a development environment shouldn't take hours or days, and shouldn't require lots of manual steps.
 
