@@ -40,4 +40,4 @@ When you're not sure if it's your environment or your code:
 
     C:\code\SomeProject> Repair-DevelopmentEnvironment.ps1
     
-    All tests pass: if your code isn't working, then either this script is incomplete or your code is broken
+    All environment tests pass. If your code isn't working, then either this script is incomplete or your code is broken. Either way, you need to go and fix something. :)
