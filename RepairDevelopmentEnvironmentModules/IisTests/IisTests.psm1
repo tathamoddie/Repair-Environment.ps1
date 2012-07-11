@@ -1,4 +1,7 @@
-﻿function Test-IisBindingExists (
+﻿#requires -Version 2
+$ErrorActionPreference = "Stop"
+
+function Test-IisBindingExists (
 	$AssertionMessage,
 	$Port,
 	$Hostname,

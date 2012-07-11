@@ -1,4 +1,7 @@
-﻿function Test-BackConnectionHostNames (
+﻿#requires -Version 2
+$ErrorActionPreference = "Stop"
+
+function Test-BackConnectionHostNames (
 	$Hostname
 ) {
 	ExecuteTest `
