@@ -10,9 +10,9 @@ if ($Verbose) { $VerbosePreference = "Continue" ; }
 $PSScriptRoot = $MyInvocation.MyCommand.Path | Split-Path
 $ModulePath = $PSScriptRoot | Join-Path -ChildPath RepairDevelopmentEnvironmentModules
 
-Import-Module $ModulePath\TestHarness
-Import-Module $ModulePath\IisTests
-Import-Module $ModulePath\SecurityTests
+Import-Module -Force -Name $ModulePath\TestHarness
+Import-Module -Force -Name $ModulePath\IisTests
+Import-Module -Force -Name $ModulePath\SecurityTests
 
 Test-PSInstanceMatchesOSBitness
 Test-PSInstanceIsElevated
