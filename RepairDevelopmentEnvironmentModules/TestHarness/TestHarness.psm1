@@ -26,16 +26,34 @@ function ExecuteTest
 		[ScriptBlock]$FixScript
 	)
 	process {
-		Write-Verbose "Validating that $AssertionMessage"
-		if (-not (& $TestScript))
+		Write-Debug "Testing that $AssertionMessage"
+		if (& $TestScript)
 		{
-			if ($FixScript -ne $null -and $PSCmdlet.ShouldProcess($AssertionMessage, "Attempt automatic fix"))
+			Write-Verbose "Test passed for $AssertionMessage"
+			return
+		}
+
+		Write-Verbose "Test failed for $AssertionMessage"
+
+		if ($FixScript -eq $null)
+		{
+			Write-TSManualStep "Manually resolve '$AssertionMessage' (no automated fix script available)"
+			return
+		}
+
+		if ($PSCmdlet.ShouldProcess($AssertionMessage, "Attempt automatic fix"))
+		{
+			Write-Debug "Applying fix for $AssertionMessage"
+			& $FixScript
+			Write-Debug "Applied fix $AssertionMessage"
+			Write-Verbose "Testing that $AssertionMessage"
+			if (& $TestScript)
 			{
-				& $FixScript
-				if (-not (& $TestScript))
-				{
-					Write-TSProblem "Automatic fix for '$AssertionMessage' failed."
-				}
+				Write-Verbose "Test passed for $AssertionMessage"
+			}
+			else
+			{
+				Write-TSProblem "Automatic fix for '$AssertionMessage' failed: problem remains (you need to fix the fix script)"
 			}
 		}
 	}
