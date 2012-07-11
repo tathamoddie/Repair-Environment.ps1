@@ -1,12 +1,12 @@
 ﻿#requires -Version 2
 ## ==============
 ## Do not modify this block.
-## It should remain consistent with https://github.com/tathamoddie/Repair-DevelopmentEnvironment.ps1 to facilitate compatibility and future upgrades.
+## It should remain consistent with https://github.com/tathamoddie/Repair-Environment.ps1 to facilitate compatibility and future upgrades.
 param ([switch]$Verbose = $false)
 $ErrorActionPreference = "Stop"
 if ($Verbose) { $VerbosePreference = "Continue" ; }
 $PSScriptRoot = $MyInvocation.MyCommand.Path | Split-Path
-$ModulePath = $PSScriptRoot | Join-Path -ChildPath RepairDevelopmentEnvironmentModules
+$ModulePath = $PSScriptRoot | Join-Path -ChildPath RepairEnvironmentModules
 Get-ChildItem $ModulePath | Select-Object -ExpandProperty FullName | Import-Module -Force
 ## ==============
 
