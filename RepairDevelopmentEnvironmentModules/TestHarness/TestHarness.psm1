@@ -17,21 +17,25 @@ function Write-TSFix ([string]$Message) {
 	Write-Host -Object "`nFix: $Message" -ForegroundColor Green
 }
 
-function ExecuteTest (
-	[string]$AssertionMessage,
-	[ScriptBlock]$TestScript,
-	[ScriptBlock]$FixScript
-) {
-	Write-Verbose "Validating that $AssertionMessage"
-	
-	if (-not (& $TestScript))
-	{
-		if ($Fix -and ($FixScript -ne $null))
+function ExecuteTest
+{
+	[CmdletBinding(ConfirmImpact="High", SupportsShouldProcess=$true)]
+	param (
+		[string]$AssertionMessage,
+		[ScriptBlock]$TestScript,
+		[ScriptBlock]$FixScript
+	)
+	process {
+		Write-Verbose "Validating that $AssertionMessage"
+		if (-not (& $TestScript))
 		{
-			& $FixScript
-			if (-not (& $TestScript))
+			if ($FixScript -ne $null -and $PSCmdlet.ShouldProcess($AssertionMessage, "Attempt automatic fix"))
 			{
-				Write-TSProblem "Automatic fix for '$AssertionMessage' failed."
+				& $FixScript
+				if (-not (& $TestScript))
+				{
+					Write-TSProblem "Automatic fix for '$AssertionMessage' failed."
+				}
 			}
 		}
 	}

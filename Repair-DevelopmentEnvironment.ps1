@@ -1,7 +1,5 @@
 ﻿#requires -Version 2
 param (
-	[switch]$Confirm = $true,
-	[switch]$Fix = $false,
 	[switch]$Verbose = $false
 )
 
