@@ -4,9 +4,9 @@ Configuring a development environment shouldn't take hours or days, and shouldn'
 
 This repository contains a set of useful base scripts to help you automate this in your team.
 
-## How this would work on a project
+## How this would work on your project
 
-When you're joining a new project:
+When a new developer joins your project:
 
     C:\code> git clone git@github.com:corporate/SomeProject.git
     Cloning into 'SomeProject'...
@@ -26,7 +26,7 @@ When you're joining a new project:
     
     All environment tests now passing (fixes were applied)
     
-When you've just pulled, then your environment broke because another developer introduced a new dependency:
+When you've just pulled new code, then your environment broke because another developer introduced a new dependency:
 
     C:\code\SomeProject> git pull
     
@@ -36,7 +36,7 @@ When you've just pulled, then your environment broke because another developer i
     
     All environment tests now passing (fixes were applied)
 
-When you're not sure if it's your environment or your code:
+When you're not sure if it's your environment or your code that's broken:
 
     C:\code\SomeProject> Repair-DevelopmentEnvironment.ps1
     
