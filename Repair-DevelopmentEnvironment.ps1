@@ -1,13 +1,15 @@
 ﻿#requires -Version 2
-param (
-	[switch]$Verbose = $false
-)
-
+## ==============
+## Do not modify this block.
+## It should remain consistent with https://github.com/tathamoddie/Repair-DevelopmentEnvironment.ps1 to facilitate compatibility and future upgrades.
+param ([switch]$Verbose = $false)
 $ErrorActionPreference = "Stop"
 if ($Verbose) { $VerbosePreference = "Continue" ; }
 $PSScriptRoot = $MyInvocation.MyCommand.Path | Split-Path
 $ModulePath = $PSScriptRoot | Join-Path -ChildPath RepairDevelopmentEnvironmentModules
 Get-ChildItem $ModulePath | Select-Object -ExpandProperty FullName | Import-Module -Force
+## ==============
+
 
 Test-PSInstanceMatchesOSBitness
 Test-PSInstanceIsElevated
