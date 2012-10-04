@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 if ($Verbose) { $VerbosePreference = "Continue" ; }
 $PSScriptRoot = $MyInvocation.MyCommand.Path | Split-Path
 $ModulePath = $PSScriptRoot | Join-Path -ChildPath RepairEnvironmentModules
-Get-ChildItem $ModulePath | Select-Object -ExpandProperty FullName | Import-Module -Force
+Get-ChildItem $ModulePath -Exclude *.* | Select-Object -ExpandProperty FullName | Import-Module -Force
 ## ==============
 
 
