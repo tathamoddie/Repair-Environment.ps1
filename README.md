@@ -25,9 +25,8 @@ When a new developer joins your project:
     Fix applied: IIS site created for services.site.localtest.me
     
     All tests now passing (fixes were applied)
-    If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future
+    If you are still experiencing an issue, diagnose the problem then add more tests here to prevent it in the future
 
-    
 When you've just pulled new code, then your environment broke because another developer introduced a new dependency:
 
     C:\code\SomeProject> git pull
@@ -37,14 +36,14 @@ When you've just pulled new code, then your environment broke because another de
     Fix applied: Back connection hostname added for service.site.localtest.me
     
     All tests now passing (fixes were applied)
-    If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future
+    If you are still experiencing an issue, diagnose the problem then add more tests here to prevent it in the future
 
 When you're not sure if it's your environment or your code that's broken:
 
     C:\code\SomeProject> Repair-Environment.ps1
     
     All tests passed (no fixes required)
-    If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future
+    If you are still experiencing an issue, diagnose the problem then add more tests here to prevent it in the future
 
 ## How to add this to your project
 

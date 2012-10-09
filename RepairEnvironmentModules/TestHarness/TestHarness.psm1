@@ -74,7 +74,7 @@ function Write-TestSummary()
         else {
             Write-Host "All tests passed (no fixes applied)" -ForegroundColor Green
         }
-        Write-Host "If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future" -ForegroundColor Green
+        Write-Host "If you are still experiencing an issue, diagnose the problem then add more tests here to prevent it in the future" -ForegroundColor Green
     }
     else {
         throw "Some tests still failing (fixes failed, or manual steps required)"
