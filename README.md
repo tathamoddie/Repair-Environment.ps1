@@ -24,7 +24,9 @@ When a new developer joins your project:
     Problem: IIS site missing for services.site.localtest.me
     Fix applied: IIS site created for services.site.localtest.me
     
-    All environment tests now passing (fixes were applied)
+    All tests now passing (fixes were applied)
+    If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future
+
     
 When you've just pulled new code, then your environment broke because another developer introduced a new dependency:
 
@@ -34,13 +36,15 @@ When you've just pulled new code, then your environment broke because another de
     Problem: Back connection hostname missing for service.site.localtest.me
     Fix applied: Back connection hostname added for service.site.localtest.me
     
-    All environment tests now passing (fixes were applied)
+    All tests now passing (fixes were applied)
+    If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future
 
 When you're not sure if it's your environment or your code that's broken:
 
     C:\code\SomeProject> Repair-Environment.ps1
     
-    All environment tests pass. If your code isn't working, then either this script is incomplete or your code is broken. Either way, you need to go and fix something. :)
+    All tests passed (no fixes required)
+    If you are still experiencing issues, diagnose the problem then add more tests here to prevent it in the future
 
 ## How to add this to your project
 
