@@ -85,7 +85,7 @@ function Test-PSInstanceMatchesOSBitness {
     Write-Debug "Checking that we're running in the correct PowerShell console for the OS"
     if (@(Get-WmiObject -Class Win32_OperatingSystem)[0].OSArchitecture -eq "64-bit") {
         if ([IntPtr]::Size -ne 8) {
-            Write-TSProblem "This script must run in a 64-bit PowerShell instance when using a 64-bit operating system."
+            throw "This script must run in a 64-bit PowerShell instance when using a 64-bit operating system."
         }
     }
 }
@@ -94,6 +94,6 @@ function Test-PSInstanceIsElevated {
     Write-Debug "Checking that we're running in an elevated PowerShell instance"
     $Principal = New-Object -TypeName System.Security.Principal.WindowsPrincipal -ArgumentList ([System.Security.Principal.WindowsIdentity]::GetCurrent())
     if (-not $Principal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-TSProblem "This script must run in an elevated PowerShell instance."
+        throw "This script must run in an elevated PowerShell instance."
     }
 }
