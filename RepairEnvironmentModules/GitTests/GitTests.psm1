@@ -51,3 +51,37 @@ function Test-GitRemote (
             & git config remote.$RemoteName.url "$ExpectedUrl"
         }
 }
+
+function Test-GitHookInstalled (
+    $HookName,
+    $InstallScriptPath
+) {
+    ExecuteTest `
+        -AssertionMessage "Git hook $HookName is installed" `
+        -TestScript {
+            $GitRepoRoot = & git rev-parse --show-toplevel
+            if (-not $?)
+            {
+                Write-TSProblem "Couldn't find the git repository root"
+                return $false
+            }
+            $GitFolder = Join-Path $GitRepoRoot '.git'
+            if (-not (Test-Path $GitFolder))
+            {
+                Write-TSProblem "Couldn't find the .git folder that we expected to see at $GitFolder"
+                return $false
+            }
+            $HookPath = Join-Path $GitFolder "hooks\$HookName"
+            if (Test-Path $HookPath)
+            {
+                Write-Verbose "$HookPath exists; $HookName hook is installed"
+                return $true
+            }
+            Write-TSProblem "Git hook not installed at $HookPath"
+            return $false
+        } `
+        -FixScript {
+            Write-TSFix "Installing Git $HookName hook using $InstallScriptPath"
+            & $InstallScriptPath
+        }
+}
