@@ -35,3 +35,5 @@ foreach ($resourceDomain in @("res0.site.localtest.me", "res1.site.localtest.me"
 }
 
 Write-TSManualStep "Ensure that SQL has the TCP/IP protocol enabled."
+
+Write-TestSummary
