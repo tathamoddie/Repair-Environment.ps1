@@ -49,7 +49,7 @@ function Test-IisBindingExists (
                         Where-Object { $_ -like "*$ExpectedSiteBinding" }).Length -gt 0
                 }
 
-            Write-TSFix "Adding :$Port:$Hostname binding to IIS site $($ExpectedSite.Name)."
+            Write-TSFix "Adding :$($Port):$($Hostname) binding to IIS site $($ExpectedSite.Name)."
             New-WebBinding -Name $ExpectedSite.Name -IPAddress "*" -Port $Port -HostHeader $Hostname
         }
 }
@@ -109,7 +109,7 @@ function Test-IisBindingIsToCorrectSite (
             Write-TSFix "Removing erroneous $Binding binding"
             Remove-WebBinding -Port $Port -HostHeader $Hostname
 
-            Write-TSFix "Adding :$Port:$Hostname binding to IIS site $($ExpectedSite.Name)."
+            Write-TSFix "Adding $Binding binding to IIS site $($ExpectedSite.Name)."
             New-WebBinding -Name $ExpectedSite.Name -IPAddress "*" -Port $Port -HostHeader $Hostname
         }
 }
