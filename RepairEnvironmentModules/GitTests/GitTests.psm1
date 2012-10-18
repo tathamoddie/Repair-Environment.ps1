@@ -59,10 +59,10 @@ function Test-GitHookInstalled (
     ExecuteTest `
         -AssertionMessage "Git hook $HookName is installed" `
         -TestScript {
-            $GitRepoRoot = & git rev-parse --show-toplevel
+            $GitRepoRoot = (& git rev-parse --show-toplevel)
             if (-not $?)
             {
-                Write-TSProblem "Couldn't find the git repository root"
+                Write-TSProblem "Couldn't find the git repository root: git rev-parse --show-toplevel failed"
                 return $false
             }
             $GitFolder = Join-Path $GitRepoRoot '.git'
@@ -77,7 +77,7 @@ function Test-GitHookInstalled (
                 Write-Verbose "$HookPath exists; $HookName hook is installed"
                 return $true
             }
-            Write-TSProblem "Git hook not installed at $HookPath"
+            Write-TSProblem "Git $HookName hook not installed at $HookPath"
             return $false
         } `
         -FixScript {
