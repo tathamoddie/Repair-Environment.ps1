@@ -85,3 +85,72 @@ function Test-GitHookInstalled (
             & $InstallScriptPath
         }
 }
+
+function Test-GitVersion
+{
+    param
+    (
+        [string] $MinimumVersion
+    )
+
+    ExecuteTest `
+        -AssertionMessage "Git version is higher than or equal to $MinimumVersion" `
+        -TestScript `
+        {
+            $fullVersionString = (git --version)
+            if ($fullVersionString -notmatch "\d+(\.\d+)+")
+            {
+                Write-TSProblem "Git version $fullVersionString does not have numeric part"
+                return $false
+            }
+
+            $versionNumberString = $matches[0]
+
+            if (Test-VersionHigherOrEqual -Current $versionNumberString -Minimum $MinimumVersion)
+            {
+                Write-Verbose "Git version $versionNumberString is higher than or equal to $MinimumVersion"
+                return $true
+            }
+
+            Write-TSProblem "Git version $versionNumberString is lower than $MinimumVersion"
+            return $false
+        }
+}
+
+function Test-VersionHigherOrEqual
+{
+    param
+    (
+        [string] $Current,
+        [string] $Minimum
+    )
+
+    $currentParts = $Current -split "\."
+    $minimumParts = $Minimum -split "\."
+
+    for ($i = 0; ($i -lt $currentParts.Length) -and ($i -lt $minimumParts.Length); $i++)
+    {
+        $currentPartDigit = $currentParts[$i]
+        if (-not $currentPartDigit)
+        {
+            $currentPartDigit = "0"
+        }
+
+        $minimumPartDigit = $minimumParts[$i]
+        if (-not $minimumPartDigit)
+        {
+            $minimumPartDigit = "0"
+        }
+
+        if ($currentPartDigit -gt $minimumPartDigit)
+        {
+            return $true
+        }
+        elseif ($currentPartDigit -lt $minimumPartDigit)
+        {
+            return $false
+        }
+    }
+
+    return $true
+}
