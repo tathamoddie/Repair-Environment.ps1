@@ -1,4 +1,4 @@
-﻿#requires -Version 2
+#requires -Version 2
 $ErrorActionPreference = "Stop"
 
 function Test-GitUserDetailsAreConfigured (
@@ -130,17 +130,8 @@ function Test-VersionHigherOrEqual
 
     for ($i = 0; ($i -lt $currentParts.Length) -and ($i -lt $minimumParts.Length); $i++)
     {
-        $currentPartDigit = $currentParts[$i]
-        if (-not $currentPartDigit)
-        {
-            $currentPartDigit = "0"
-        }
-
-        $minimumPartDigit = $minimumParts[$i]
-        if (-not $minimumPartDigit)
-        {
-            $minimumPartDigit = "0"
-        }
+        $currentPartDigit = [int] $currentParts[$i]
+        $minimumPartDigit = [int] $minimumParts[$i]
 
         if ($currentPartDigit -gt $minimumPartDigit)
         {
